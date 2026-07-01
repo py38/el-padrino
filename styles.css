@@ -262,7 +262,20 @@ header.nav.shrink{
 .menu{ background:var(--noir-2); }
 .menu-head{ text-align:center; margin-bottom:2.6rem; }
 .menu-head .label{ display:block; margin-bottom:1rem; }
-.menu-tabs{ display:flex; flex-wrap:wrap; gap:.55rem; justify-content:center; margin:2.4rem auto 3.4rem; }
+.menu-switch{ display:flex; justify-content:center; gap:1.4rem; margin-top:2rem; }
+.menu-switch button{
+  font-family:var(--f-display); font-style:italic; font-weight:500; font-size:clamp(1.3rem,2vw,1.7rem);
+  color:var(--ivory-2); background:none; border:0; cursor:pointer; padding:.3rem .4rem; position:relative;
+  transition-property:color; transition-duration:.35s;
+}
+.menu-switch button::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:var(--accent);
+  transform:scaleX(0); transform-origin:center; transition:transform .4s var(--ease);
+}
+.menu-switch button.active{ color:var(--accent-2); }
+.menu-switch button.active::after{ transform:scaleX(1); }
+
+.menu-tabs{ display:flex; flex-wrap:wrap; gap:.55rem; justify-content:center; margin:2.2rem auto 3.4rem; }
 .menu-tab{
   font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ivory-2);
   padding:.7rem 1.25rem; border:1px solid var(--line); background:transparent; cursor:pointer;
@@ -281,6 +294,7 @@ header.nav.shrink{
 .menu-item.in{ opacity:1; transform:none; }
 .menu-item .mi-name{ font-family:var(--f-display); font-size:1.45rem; font-weight:500; color:var(--ivory); line-height:1.15; }
 .menu-item .mi-price{ font-family:var(--f-body); font-size:.88rem; letter-spacing:.08em; color:var(--accent-2); white-space:nowrap; padding-top:.4rem; font-variant-numeric:tabular-nums; }
+.menu-item .mi-price .mi-b{ color:var(--mute); }
 .menu-item .mi-desc{ grid-column:1 / -1; font-size:.85rem; color:var(--mute); font-weight:300; max-width:52ch; }
 .menu-note{ text-align:center; margin-top:3rem; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--mute); }
 

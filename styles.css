@@ -333,6 +333,7 @@ header.nav.shrink{
 .reserve-card h3{ font-size:2.1rem; margin-bottom:.4rem; }
 .reserve-card .intro-line{ color:var(--mute); font-size:.9rem; }
 .field{ margin-top:1.3rem; }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
 .field label{ display:block; font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:var(--mute); margin-bottom:.5rem; }
 .field input, .field select{
   width:100%; background:transparent; border:0; border-bottom:1px solid var(--line);

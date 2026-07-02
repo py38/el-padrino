@@ -428,6 +428,16 @@
       ["Latte ou cappuccino", "Boisson chaude", "5 000"],
       ["Grog avec alcool", "Boisson chaude", "9 000"],
       ["Eaux Kirène, Thonon, Vals", "Eau", "4 000"]
+    ],
+    "Cigares": [
+      ["Cohiba", "Habanos, La Havane, Cuba"],
+      ["Montecristo", "Habanos, La Havane, Cuba"],
+      ["Romeo y Julieta", "Habanos, La Havane, Cuba"],
+      ["H. Upmann", "Habanos, La Havane, Cuba"],
+      ["Hoyo de Monterrey", "Habanos, La Havane, Cuba"],
+      ["Plasencia", "Nicaragua"],
+      ["Alma Fuerte", "Plasencia, Nicaragua"],
+      ["Sélection du moment", "Habanos et cigares du Nouveau Monde selon arrivage"]
     ]
   };
 
@@ -441,16 +451,22 @@
   var gridEl = document.getElementById("menuGrid");
   var noteEl = document.getElementById("menuNote");
 
+  var currentNote = "";
+  var CIGAR_NOTE = "Cave à cigares. Modules et prix communiqués par votre hôte, selon arrivage.";
+
   function renderMenu(data, cat) {
     gridEl.innerHTML = "";
+    noteEl.textContent = (cat === "Cigares") ? CIGAR_NOTE : currentNote;
     data[cat].forEach(function (item, i) {
-      var price = item[2] + (item[3] ? " <span class='mi-b'>/ " + item[3] + "</span>" : "");
+      var priceHTML = "";
+      if (item[2]) {
+        priceHTML = '<div class="mi-price">' + item[2] +
+          (item[3] ? " <span class='mi-b'>/ " + item[3] + "</span>" : "") + "</div>";
+      }
       var desc = item[1] ? '<div class="mi-desc">' + item[1] + "</div>" : "";
       var el = document.createElement("div");
       el.className = "menu-item";
-      el.innerHTML =
-        '<div class="mi-name">' + item[0] + "</div>" +
-        '<div class="mi-price">' + price + "</div>" + desc;
+      el.innerHTML = '<div class="mi-name">' + item[0] + "</div>" + priceHTML + desc;
       gridEl.appendChild(el);
       setTimeout(function () { el.classList.add("in"); }, 40 + i * 45);
     });
@@ -476,7 +492,7 @@
     switchEl.querySelectorAll("button").forEach(function (b, i) {
       b.classList.toggle("active", i === idx);
     });
-    noteEl.textContent = set.note;
+    currentNote = set.note;
     renderTabs(set.data);
     renderMenu(set.data, Object.keys(set.data)[0]);
   }
@@ -499,6 +515,7 @@
       var nom = form.nom.value.trim();
       var tel = form.tel.value.trim();
       var date = form.date.value;
+      var heure = form.heure.value;
       var convives = form.convives.value;
 
       var jolieDate = date;
@@ -512,6 +529,7 @@
         "Nom : " + nom + "\n" +
         "Telephone : " + tel + "\n" +
         "Date : " + (jolieDate || "a preciser") + "\n" +
+        "Heure : " + (heure || "a preciser") + "\n" +
         "Convives : " + convives;
 
       var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
